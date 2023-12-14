@@ -9,7 +9,7 @@ import SingleProduct from "./SingleProduct";
 import ErrorPage from "./ErrorPage";
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
-import Header from "./Cmponents/Header";
+import Header from "./Components/Header";
 
 const App = () => {
   const theme = {
