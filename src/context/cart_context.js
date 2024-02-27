@@ -12,6 +12,7 @@ const getLocalCartData = () => {
   }
 };
 
+
 const initialState = {
   // cart: [],
   cart: getLocalCartData(),
@@ -51,8 +52,10 @@ const CartProvider = ({ children }) => {
   // get vs set
 
   useEffect(() => {
-    dispatch({ type: "CART_TOTAL_ITEM" });
-    dispatch({ type: "CART_TOTAL_PRICE" });
+    // dispatch({ type: "CART_TOTAL_ITEM" });
+    // dispatch({ type: "CART_TOTAL_PRICE" });
+    dispatch({ type: "CART_ITEM_PRICE_TOTAL" });
+
     localStorage.setItem("thapaCart", JSON.stringify(state.cart));
   }, [state.cart]);
 
