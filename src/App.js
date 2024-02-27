@@ -13,7 +13,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
 const App = () => {
-  const theme = {
+  const theme = {            
     colors: {
       heading: "rgb(24 24 29)",
       text: "rgba(29 ,29, 29, .8)",
