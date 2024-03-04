@@ -1,6 +1,6 @@
-const cartReducer = (state, action) => {
+/*const cartReducer = (state, action) => {
     if (action.type === "ADD_TO_CART") {
-      let { id, color, amount, product } = action.payload;
+let { id, color, amount, product } = action.payload;
   
       // tackle the existing product
   
@@ -8,8 +8,8 @@ const cartReducer = (state, action) => {
         (curItem) => curItem.id === id + color
       );
   
-      if (existingProduct) {
-        let updatedProduct = state.cart.map((curElem) => {
+   if (existingProduct) {
+   let updatedProduct = state.cart.map((curElem) => {
           if (curElem.id === id + color) {
             let newAmount = curElem.amount + amount;
   
@@ -48,7 +48,7 @@ const cartReducer = (state, action) => {
   
     // to set the increment and decrement
     if (action.type === "SET_DECREMENT") {
-      let updatedProduct = state.cart.map((curElem) => {
+  let updatedProduct = state.cart.map((curElem) => {
         if (curElem.id === action.payload) {
           let decAmount = curElem.amount - 1;
   
@@ -68,7 +68,7 @@ const cartReducer = (state, action) => {
     }
   
     if (action.type === "SET_INCREMENT") {
-      let updatedProduct = state.cart.map((curElem) => {
+  let updatedProduct = state.cart.map((curElem) => {
         if (curElem.id === action.payload) {
           let incAmount = curElem.amount + 1;
   
@@ -135,7 +135,8 @@ const cartReducer = (state, action) => {
     // }
   
     if (action.type === "CART_ITEM_PRICE_TOTAL") {
-      let { total_item, total_price } = state.cart.reduce(
+    
+      /*let { total_item, total_price } = state.cart.reduce(
         (accum, curElem) => {
           let { price, amount } = curElem;
   
@@ -148,12 +149,16 @@ const cartReducer = (state, action) => {
           total_item: 0,
           total_price: 0,
         }
+        
       );
+      
+      
       return {
         ...state,
         total_item,
         total_price,
       };
+      /
     }
   
     return state;
@@ -162,3 +167,44 @@ const cartReducer = (state, action) => {
   export default cartReducer;
   
   // https://stackoverflow.com/questions/63117470/how-to-return-two-values-in-reduce#:~:text=You%20cannot%20return%20two%20values%20in%20reduce%20.
+*/
+const cartReducer = (state, action) => {
+  if (action.type === "ADD_TO_CART") {
+    let { id, color, amount, product } = action.payload;
+    // console.log(
+    //   "🚀 ~ file: cartReducer.js ~ line 4 ~ cartReducer ~ product",
+    //   product
+    // );
+
+    let cartProduct;
+
+    cartProduct = {
+      id: id + color,
+      name: product.name,
+      color,
+      amount,
+      image: product.image[0].url,
+      price: product.price,
+      max: product.stock,
+    };
+
+    return {
+      ...state,
+      cart: [...state.cart, cartProduct],
+    };
+  }
+
+  if (action.type === "REMOVE_ITEM") {
+    let updatedCart = state.cart.filter(
+      (curItem) => curItem.id !== action.payload
+    );
+    return {
+      ...state,
+      cart: updatedCart,
+    };
+  }
+
+  return state;
+};
+
+export default cartReducer;
