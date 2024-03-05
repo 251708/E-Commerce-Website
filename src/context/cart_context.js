@@ -1,12 +1,12 @@
-/*import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import reducer from "../reducer/cartReducer";
 
 const CartContext = createContext();
 
 const getLocalCartData = () => {
-  let localCartData = localStorage.getItem("thapaCart");
-  if (localCartData === "some value") {
-    return "some valu";
+  let localCartData = localStorage.getItem("SakshiCart");
+  if (localCartData === []) {
+    return [];
   } else {
     return JSON.parse(localCartData);
   }
@@ -16,7 +16,7 @@ const getLocalCartData = () => {
 
 
 const initialState = {
-  // cart: [],
+   //cart: [],
   cart: getLocalCartData(),
   total_item: "",
   total_price: "",
@@ -58,7 +58,7 @@ const CartProvider = ({ children }) => {
     // dispatch({ type: "CART_TOTAL_PRICE" });
     dispatch({ type: "CART_ITEM_PRICE_TOTAL" });
 
-    localStorage.setItem("thapaCart", JSON.stringify(state.cart));
+    localStorage.setItem("SakshiCart", JSON.stringify(state.cart));
   }, [state.cart]);
 
   return (
@@ -80,39 +80,4 @@ const useCartContext = () => {
   return useContext(CartContext);
 };
 export { CartProvider, useCartContext };
-*/
-import { createContext, useContext, useReducer } from "react";
-import reducer from "../reducer/cartReducer";
 
-const CartContext = createContext();
-
-const initialState = {
-  cart: [],
-  total_item: "",
-  total_amount: "",
-  shipping_fee: 50000,
-};
-
-const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const addToCart = (id, color, amount, product) => {
-    dispatch({ type: "ADD_TO_CART", payload: { id, color, amount, product } });
-  };
-
-  const removeItem = (id) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id });
-  };
-
-  return (
-    <CartContext.Provider value={{ ...state, addToCart, removeItem }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
-
-const useCartContext = () => {
-  return useContext(CartContext);
-};
-
-export { CartProvider, useCartContext };
